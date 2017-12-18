@@ -377,9 +377,15 @@ public class WeatherPositiveTest extends BaseTestCase {
 			log("URL under test: "+url);
 			responseObject = getmethod.getResponseObject(url);
 			MultivaluedMap<String, String> headers = responseObject.getHeaders();
-			assertTrue(headers.containsKey("Date"));
-			assertTrue(headers.containsKey("Content-Type"));
-			assertTrue(headers.containsKey("Content-Length"));
+			boolean dateHeaderExists = headers.containsKey("Date");
+			log("Header date exists: "+dateHeaderExists);
+			assertTrue(dateHeaderExists);
+			boolean contentTypeHeaderExists = headers.containsKey("Content-Type");
+			log("Content-Type Header exists: "+contentTypeHeaderExists);
+			assertTrue(contentTypeHeaderExists);
+			boolean contentLengthHeaderExists = headers.containsKey("Content-Length");
+			log("Content-Length Header exists: "+contentLengthHeaderExists);
+			assertTrue(contentLengthHeaderExists);
 			newLine();
 		}
 	
