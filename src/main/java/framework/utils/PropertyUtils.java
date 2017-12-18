@@ -18,7 +18,7 @@ public class PropertyUtils {
 	private static Properties properties;
 	private static PropertyUtils propertyutils;
 	private PropertyUtils(){
-		
+
 	}
 	public static PropertyUtils getPropertiesInstance(){
 		if(properties == null){
@@ -37,9 +37,9 @@ public class PropertyUtils {
 		else{
 			return propertyutils;
 		}
-			
+
 	}
-	
+
 	public static String getProperty(String propertyName){
 		return PropertyUtils.properties.getProperty(propertyName);
 	}

@@ -3,9 +3,6 @@ package pojos;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.node.ObjectNode;
-
 public class Weather
 {
     private String id;

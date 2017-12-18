@@ -1,18 +1,11 @@
 package framework.utils;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 
 public class WeatherUtils {
 	private static WeatherUtils instance = null;
-	public static void main(String[] args) {
-		WeatherUtils utils = WeatherUtils.getWeatherUtilsInstance();
-		String url = utils.createWeatherAPIURL("http://api.openweathermap.org/data/2.5/weather", "q=Dublin", "deab6b3d8ab8aee1edbaa4c753b2a165");
-		String url1 = utils.createWeatherAPIURL("http://api.openweathermap.org/data/2.5/weather", "q=São Tomé", "deab6b3d8ab8aee1edbaa4c753b2a165");
-		System.out.println(url1);
-	}
+
 	private WeatherUtils(){
-		
+
 	}
 	public static WeatherUtils getWeatherUtilsInstance(){
 		if(instance == null){

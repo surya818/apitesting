@@ -13,7 +13,6 @@ import pojos.Weather;
 
 import org.testng.annotations.BeforeClass;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +20,6 @@ import java.util.Map;
 import javax.ws.rs.core.MultivaluedMap;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.json.simple.parser.ParseException;
 import static framework.utils.LoggerUtils.*;
 import static framework.utils.PropertyUtils.*;
 import static org.testng.Assert.*;
@@ -389,3 +387,4 @@ public class WeatherPositiveTest extends BaseTestCase {
 	
 
 }
+	
