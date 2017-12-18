@@ -40,6 +40,12 @@ public class LatLongNegativeTest {
 	public String query_by_NegativeBoundaryOutOfBounds_longitude;
 	public String query_by_PositiveBoundaryOutOfBounds_lat;
 	public String query_by_PositiveBoundaryOutOfBounds_longitude;
+	public String error_400_message;
+	public String query_by_NonNumericLatitude;
+	public String query_by_NonNumericLongitude;
+	public String query_by_BlankLatitude;
+	public String query_by_BlankLongitude;
+	public String error_400_latLongGenericError_message;
 	public String error_400_latLongOutOfBoundary_message;
 
 
@@ -59,8 +65,14 @@ public class LatLongNegativeTest {
 		query_by_NegativeBoundaryOutOfBounds_longitude = getProperty("query_by_NegativeBoundaryOutOfBounds_longitude");
 		query_by_PositiveBoundaryOutOfBounds_lat = getProperty("query_by_PositiveBoundaryOutOfBounds_lat");
 		query_by_PositiveBoundaryOutOfBounds_longitude = getProperty("query_by_PositiveBoundaryOutOfBounds_longitude");
+		error_400_message = getProperty("error_400_message");
+		query_by_NonNumericLatitude = getProperty("query_by_NonNumericLatitude");
+		query_by_NonNumericLongitude = getProperty("query_by_NonNumericLongitude");
+		query_by_BlankLatitude = getProperty("query_by_BlankLatitude");
+		query_by_BlankLongitude = getProperty("query_by_BlankLongitude");
 		error_400_latLongOutOfBoundary_message = getProperty("error_400_latLongOutOfBoundary_message");
-
+		error_400_latLongGenericError_message = getProperty("error_400_latLongGenericError_message");
+		
 	}
 
 	@AfterClass
@@ -170,6 +182,86 @@ public class LatLongNegativeTest {
 		log("Error Message for Longitude Negative Boundary -OutOfBounds from test Data: "+error_400_latLongOutOfBoundary_message);
 		log("Error message from API, for Longitude Negative Boundary - OutOfBounds: "+errorMessageFromAPIResponse);
 		assertTrue(errorMessageFromAPIResponse.contains(error_400_latLongOutOfBoundary_message));
+		newLine();
+	}
+	
+	@Test
+	public void test_307_NegativeTest_NonNumericLatitude_StatusCodeAndResponseBodyCheck(){
+		newLine();
+		log("Executing test ==> test_307_NegativeTest_NonNumericLatitude_StatusCodeAndResponseBodyCheck");
+		String url = utils.createWeatherAPIURL(base_url, query_by_NonNumericLatitude, app_id);
+		log("URL under test: "+url);
+		responseObject = getmethod.getResponseObject(url);
+		int status_code = responseObject.getStatus();
+		log("Status Code for NonNumericLatitude URL: "+status_code );
+		assertEquals(status_code, 400);
+
+		JSONObject responseJSONObject = data.transformClientResponseToJSONObject(responseObject);
+		log("Server response for NonNumericLongitude: "+responseJSONObject.toJSONString());
+		String errorMessageFromAPIResponse = responseJSONObject.get("message").toString();
+		log("Error Message for NonNumericLatitude from test Data: "+error_400_latLongGenericError_message);
+		log("Error message from API, for NonNumericLatitude: "+errorMessageFromAPIResponse);
+		assertTrue(errorMessageFromAPIResponse.contains(error_400_latLongGenericError_message));
+		newLine();
+	}
+
+	@Test
+	public void test_308_NegativeTest_NonNumericLongitude_StatusCodeAndResponseBodyCheck(){
+		newLine();
+		log("Executing test ==> test_308_NegativeTest_NonNumericLongitude_StatusCodeAndResponseBodyCheck");
+		String url = utils.createWeatherAPIURL(base_url, query_by_NonNumericLongitude, app_id);
+		log("URL under test: "+url);
+		responseObject = getmethod.getResponseObject(url);
+		int status_code = responseObject.getStatus();
+		log("Status Code for NonNumericLongitude URL: "+status_code );
+		assertEquals(status_code, 400);
+
+		JSONObject responseJSONObject = data.transformClientResponseToJSONObject(responseObject);
+		log("Server response for NonNumericLongitude: "+responseJSONObject.toJSONString());
+		String errorMessageFromAPIResponse = responseJSONObject.get("message").toString();
+		log("Error Message for NonNumericLongitude from test Data: "+error_400_latLongGenericError_message);
+		log("Error message from API, for NonNumericLongitude: "+errorMessageFromAPIResponse);
+		assertTrue(errorMessageFromAPIResponse.contains(error_400_latLongGenericError_message));
+		newLine();
+	}
+	
+	@Test
+	public void test_309_NegativeTest_BlankLatitude_StatusCodeAndResponseBodyCheck(){
+		newLine();
+		log("Executing test ==> test_309_NegativeTest_BlankLatitude_StatusCodeAndResponseBodyCheck");
+		String url = utils.createWeatherAPIURL(base_url, query_by_BlankLatitude, app_id);
+		log("URL under test: "+url);
+		responseObject = getmethod.getResponseObject(url);
+		int status_code = responseObject.getStatus();
+		log("Status Code for Blank Latitude URL: "+status_code );
+		assertEquals(status_code, 400);
+
+		JSONObject responseJSONObject = data.transformClientResponseToJSONObject(responseObject);
+		log("Server response for Blank Latitude: "+responseJSONObject.toJSONString());
+		String errorMessageFromAPIResponse = responseJSONObject.get("message").toString();
+		log("Error Message for blank Latitude from test Data: "+error_400_message);
+		log("Error message from API, for blank Latitude: "+errorMessageFromAPIResponse);
+		assertTrue(errorMessageFromAPIResponse.contains(error_400_message));
+		newLine();
+	}
+
+	@Test
+	public void test_310_NegativeTest_BlankLongitude_StatusCodeAndResponseBodyCheck(){
+		newLine();
+		log("Executing test ==> test_310_NegativeTest_BlankLongitude_StatusCodeAndResponseBodyCheck");
+		String url = utils.createWeatherAPIURL(base_url, query_by_BlankLongitude, app_id);
+		log("URL under test: "+url);
+		responseObject = getmethod.getResponseObject(url);
+		int status_code = responseObject.getStatus();
+		log("Status Code for Blank Longitude URL: "+status_code );
+		assertEquals(status_code, 400);
+
+		JSONObject responseJSONObject = data.transformClientResponseToJSONObject(responseObject);
+		log("Server response for Blank Latitude: "+responseJSONObject.toJSONString());
+		String errorMessageFromAPIResponse = responseJSONObject.get("message").toString();
+		log("Error Message for blank Longitude from test Data: "+error_400_message);
+		log("Error message from API, for blank Longitude: "+errorMessageFromAPIResponse);
+		assertTrue(errorMessageFromAPIResponse.contains(error_400_message));
 		newLine();
 	}
 
