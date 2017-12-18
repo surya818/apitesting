@@ -3,9 +3,7 @@ This Project aims to create a testing framework for RESTful APIs.
 Code consists of reusable components that could be used to write tests. I used the framework to test openweather api.
 </b>
 
-<b>
-Pre-requisites:
-</b>
+<b>Pre-requisites:</b>
 1. Java installed ans setup complete
 2. maven installed, able to run (mvn -version) command
 
