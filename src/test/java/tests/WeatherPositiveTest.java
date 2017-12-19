@@ -85,6 +85,11 @@ public class WeatherPositiveTest extends BaseTestCase {
 		
 		newLine();
 		log("Executing test ==> test_102_SearchByID_MandatoryAttributesCheckInResponse");
+		String url = utils.createWeatherAPIURL(base_url, query_by_id_valid, app_id);
+		log("URL under test: "+url);
+		responseObject = getmethod.getResponseObject(url);
+		String responseAsString = getmethod.getResponseObjectInString(url); 
+		log("JSON Response as String: "+responseAsString);
 		responseAsMap = (HashMap<String, ?>) data.transfromJSONAsMap(responseObject);
 		String mandatory_attributes_csv = getProperty("mandatory_attributes_in_response");
 		String[] mandatory_attributes = mandatory_attributes_csv.split(",");
@@ -92,6 +97,43 @@ public class WeatherPositiveTest extends BaseTestCase {
 			boolean tmp_attribute_exists = responseAsMap.containsKey(attribute);
 			log("Attribute \""+attribute+"\" exists == "+tmp_attribute_exists);
 			assertTrue(tmp_attribute_exists);
+		}
+		Weather weatherPojo = data.transformJSONResponseIntoPOJO(responseAsString, Weather.class);
+		log("Validating coord node in API response");
+		Map<String,String> nodeCoordsDetails = weatherPojo.getCoord();
+		String coord_mandatoryAttributes_csv = getProperty("mandatory_attributes_inNode_coord");
+		String [] coord_mandatoryAttributes = coord_mandatoryAttributes_csv.split(",");
+		for(String attribute:coord_mandatoryAttributes){
+			boolean attributeExists = nodeCoordsDetails.containsKey(attribute);
+			log(attribute+" exists: "+attributeExists);
+			assertTrue(attributeExists,attribute+" doesn't exist");
+		}
+		log("Validating Weather node in API response");
+		Map<String,String> nodeWeatherDetails = weatherPojo.getWeather().get(0);
+		String weather_mandatoryAttributes_csv = getProperty("mandatory_attributes_inNode_weather");
+		String [] weather_mandatoryAttributes = weather_mandatoryAttributes_csv.split(",");
+		for(String attribute:weather_mandatoryAttributes){
+			boolean attributeExists = nodeWeatherDetails.containsKey(attribute);
+			log(attribute+" exists: "+attributeExists);
+			assertTrue(attributeExists,attribute+" doesn't exist");
+		}
+		log("Validating main node in API response");
+		Map<String,String> nodeMainDetails = weatherPojo.getMain();
+		String main_mandatoryAttributes_csv = getProperty("mandatory_attributes_inNode_main");
+		String [] main_mandatoryAttributes = main_mandatoryAttributes_csv.split(",");
+		for(String attribute:main_mandatoryAttributes){
+			boolean attributeExists = nodeMainDetails.containsKey(attribute);
+			log(attribute+" exists: "+attributeExists);
+			assertTrue(attributeExists,attribute+" doesn't exist");
+		}
+		log("Validating sys node in API response");
+		Map<String,String> nodeSysDetails = weatherPojo.getSys();
+		String sys_mandatoryAttributes_csv = getProperty("mandatory_attributes_inNode_sys");
+		String [] sys_mandatoryAttributes = sys_mandatoryAttributes_csv.split(",");
+		for(String attribute:sys_mandatoryAttributes){
+			boolean attributeExists = nodeSysDetails.containsKey(attribute);
+			log(attribute+" exists: "+attributeExists);
+			assertTrue(attributeExists,attribute+" doesn't exist");
 		}
 		newLine();
 	}
@@ -113,6 +155,11 @@ public class WeatherPositiveTest extends BaseTestCase {
 		String cityNameFromSerializedResponseObject = weather.getName();
 		log("City name from API RESPONSE: "+cityNameFromSerializedResponseObject);
 		assertEquals(cityNameFromTestData, cityNameFromSerializedResponseObject);
+		String city_ID = query_by_id_valid.split("=")[1];
+		String cityIDFromAPIResponse = weather.getId();
+		log("City ID from API response: "+cityIDFromAPIResponse);
+		log("City ID from Test data: "+city_ID);
+		assertTrue(cityIDFromAPIResponse.equals(city_ID), "City ID is different from the ID in the test data");
 		newLine();
 		
 	}

@@ -355,25 +355,6 @@ public class CityIDAndNameNegativeTest {
 		newLine();
 	}
 
-	@Test
-	public void test_213_NegativeTest_LatitudeAndLongitudeBoundaryConditions_StatusCodeAndResponseBodyCheck(){
-		newLine();
-		log("Executing test ==> test_211_NegativeTest_BlankCityAndCountryName_StatusCodeAndResponseBodyCheck");
-		String url = utils.createWeatherAPIURL(base_url, query_by_BigNumber, app_id);
-		log("URL under test: "+url);
-		responseObject = getmethod.getResponseObject(url);
-		log("Response Object for Very Big number as ID:"+responseObject);
-		int status_code = responseObject.getStatus();
-		log("Status Code for Blank City and Country Name : "+status_code );
-		assertEquals(status_code, 400);
-
-		JSONObject responseJSONObject = data.transformClientResponseToJSONObject(responseObject);
-		log("JSON manifestation of response: "+responseJSONObject.toJSONString());
-		String errorMessageFromAPIResponse = responseJSONObject.get("message").toString();
-		log("Error Message for Very Big number as ID from test Data: "+error_400_message);
-		log("Error message from API, for Very Big number as ID : "+error_400_VeryBigNumber_ID_message);
-		assertTrue(errorMessageFromAPIResponse.contains(error_400_VeryBigNumber_ID_message));
-		newLine();
-	}
+	
 
 }
